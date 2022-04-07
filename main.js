@@ -1,7 +1,7 @@
 let col = 0, row = 0;
 let grid = [];
 let guess = '';
-let word = '';
+let word = 'penis';
 
 const options = {
 	method: 'GET',
@@ -11,10 +11,10 @@ const options = {
 	}
 };
 
-fetch('https://random-words5.p.rapidapi.com/getRandom?wordLength=5', options)
-	.then(response => response.json())
-	.then(data => word = data)
-	.catch(err => console.error(err));
+// fetch('https://random-words5.p.rapidapi.com/getRandom?wordLength=5', options)
+// 	.then(response => response.text())
+// 	.then(data => word = data)
+// 	.catch(err => console.error(err));
 
     
 function createGrid() {
@@ -31,17 +31,19 @@ createGrid();
 
 function compareWords(guess) {
     if(guess.toLowerCase() == word) {
-        console.log('you won')
+        const alert = document.createElement('div');
+        alert.className = 'alert';
+        alert.innerHTML = 'Congrats, you guessed the word !';
+        document.body.appendChild(alert);
     }
     for(let i = 0;i < guess.length;i++) {
         if(word.includes(guess[i])) {
-            // yellow
                 grid[row][i].setAttribute('class', 'square yellow');
             if(word[i] === guess[i]) {
-                // console.log(i);
                 grid[row][i].setAttribute('class', 'square green');
-                // green
             }
+        } else {
+            grid[row][i].setAttribute('class', 'square grey');
         }
     }
 }
